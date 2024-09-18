@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+        .card{
+            width: 300px;
+            height: 250px;
+            border: 1px solid white;
+            text-align: center;
+            padding: 2rem;
+            background-image: linear-gradient(to right, rgb(122, 65, 254),white, rgb(122, 65, 254));
+            box-shadow: 10px 10px 5px rgb(122, 65, 254);
+            position: relative;
+        }
+        button{
+            height: 30px;
+            width: 80px;
+            background-color: rgb(122, 65, 254);
+            border: none;
+            color: white;
+            position: absolute;
+            left: 35%;
+            bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>hello</h2><br>
+        <p id="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis similique magnam ex neque iusto, quo eveniet optio quidem recusandae hic.</p><br>
+        <button onclick="clickme()">Click Me</button>
+    </div>
+
+    <script>
+        const projectcard = [
+            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit dignissimos doloremque maxime ea?",
+            "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+            "hello how are you",
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit reprehenderit mollitia ipsam eius, dolores perferendis quibusdam facere consequatur eum.",
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius!"
+        ]
+
+        function clickme() {
+            var randomIndex = Math.floor(Math.random() * projectcard.length);
+            document.getElementById('text').textContent = projectcard[randomIndex];
+        }
+
+    </script>
+</body>
+
+</html>
