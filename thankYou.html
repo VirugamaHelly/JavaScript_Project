@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid blueviolet;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 100px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .success {
+            text-align: center;
+            font-size: 24px;
+            color: blueviolet;
+            margin-top: 20px;
+        }
+        .text{
+            text-align: center;
+            font-size: 24px;
+
+        }
+        .img img{
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="abc">
+        <div class="loader"></div>
+        <div class="text">Your Payment Was Processing...</div>
+        <div class="success" style="display: none;">Payment successful!</div>
+    </div>
+    <div class="img" style="display: none;">
+        <img src="https://marketplace.canva.com/EAFDdJQXXAA/1/0/1600w/canva-brown-cream-abstract-business-thank-you-card-fdC66CTg8sQ.jpg" alt="" class="img">
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.querySelector('.loader').style.display = 'none';
+            document.querySelector('.text').style.display = 'none';
+            document.querySelector('.success').style.display = 'block';
+        }, 3000);
+
+        setTimeout(() => {
+            document.querySelector('.loader').style.display = 'none';
+            document.querySelector('.text').style.display = 'none';
+            document.querySelector('.success').style.display = 'none';
+            document.querySelector(".img").style.display = "block";
+        }, 5000);
+    </script>
+</body>
+
+</html>

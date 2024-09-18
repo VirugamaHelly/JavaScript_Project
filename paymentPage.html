@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+
+        }
+
+        i {
+            font-size: 42px;
+            margin: 7px;
+        }
+
+        input {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+
+
+        .main {
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 620px;
+            height: auto;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            letter-spacing: 2px;
+            padding: 3rem;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 8px;
+            background-color: rgb(252, 95, 121);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            letter-spacing: 2px;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h2>select payment method</h2><br>
+
+
+        <input type="text" id="textcode" placeholder="Enter code..." required>
+        <button onclick="code()">Check Code</button>
+        <br><br>
+
+        <h2>Another payment Method</h2><br>
+        <p>credit or Debit card & ..</p><br>
+        <i class="fas fa-credit-card"></i>
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-paypal"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-apple-pay"></i>
+        <i class="fab fa-cc-amazon-pay"></i>
+        <br><br>
+        <label for="expiryDate">Expiry Month & Year:</label><br>
+        <input type="text" id="expiryDate" placeholder="MM/YY" required><br><br>
+
+        <label for="creditNo">Credit Card Number:</label><br>
+        <input type="text" id="creditNo" placeholder="Enter your credit Card Number.." required><br><br>
+
+        <label for="cvv">Enter CVV:</label><br>
+        <input type="text" id="cvv" placeholder="Enter CVV" required><br><br>
+
+        <label for="cardName">Name of Card:</label><br>
+        <input type="text" id="cardName" placeholder="Enter your Name of Card" required><br><br>
+
+
+        <button id="submitBtn" onclick="return validateForm()">Submit</button>
+    </div>
+</body>
+
+<script>
+    const a = "flip2024";
+
+    function code() {
+        var textcode = document.getElementById("textcode").value;
+        if (textcode !== a) {
+            alert("Enter valid code");
+            return false;
+        } else {
+            alert("Code is valid");
+            return true;
+        }
+    }
+
+    function validateForm() {
+        var requiredFields = document.querySelectorAll("input[required]");
+        var isValid = true;
+        requiredFields.forEach(function(field) {
+            if (!field.value.trim()) {
+                alert("Please fill all required fields.");
+                isValid = false;
+            }
+        });
+        if (!isValid) {
+            return false;
+        }
+        checkCreditCard();
+        checkCvv();
+        Submit(); 
+        return false; 
+    }
+
+    function checkCreditCard() {
+        var creditCardNumber = document.getElementById("creditNo").value;
+        if (creditCardNumber.length !== 16) {
+            alert("Credit card number must be 16 digits.");
+        }
+    }
+
+    function checkCvv() {
+        var cvv = document.getElementById("cvv").value;
+        if (cvv.length !== 3) {
+            alert("CVV must be 3 digits.");
+        }
+    }
+
+    function Submit() {
+        window.location.href = "thankYou.html";
+    }
+
+//1234567812345678
+</script>
+
+</html>

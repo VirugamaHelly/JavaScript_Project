@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .product-container {
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 1rem;
+            text-align: center;
+            width: 100%;
+            max-width: 340px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        img {
+            height: auto;
+            max-width: 280px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button {
+            padding: 8px;
+            background-color: blueviolet;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 25px;
+            padding: 1rem;
+            font-size: 15px;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .product-container {
+                max-width: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var product = JSON.parse(localStorage.getItem("information")) || [];
+        product.forEach((el, i) => {
+
+            var div = document.createElement("div");
+            div.classList.add("product-container");
+
+            var img = document.createElement("img");
+            img.src = el.img;
+
+            var productName = document.createElement("h3");
+            productName.innerHTML = el.Product_name;
+
+            var price = document.createElement("p");
+            price.innerHTML = el.Price;
+
+            var Rating = document.createElement("p");
+            Rating.innerHTML = el.Rating;
+
+            var quantityLabel = document.createElement("label");
+            quantityLabel.innerHTML = "Quantity: ";
+
+            var quantitySpan = document.createElement("span");
+            quantitySpan.classList.add("quantity");
+            quantitySpan.innerHTML = "1"; 
+
+            var incrementButton = document.createElement("button");
+            incrementButton.innerHTML = "+";
+            incrementButton.addEventListener("click", function () {
+                var currentQuantity = parseInt(quantitySpan.innerHTML);
+                quantitySpan.innerHTML = (currentQuantity + 1).toString();
+                updatePrice(el.Price, true);
+            });
+
+            var decrementButton = document.createElement("button");
+            decrementButton.innerHTML = "-";
+            decrementButton.addEventListener("click", function () {
+                var currentQuantity = parseInt(quantitySpan.innerHTML);
+                if (currentQuantity > 1) {
+                    quantitySpan.innerHTML = (currentQuantity - 1).toString();
+                    updatePrice(el.Price, false);
+                }
+            });
+
+            var removeButton = document.createElement("button");
+            removeButton.innerHTML = "Remove";
+
+            var buyButton = document.createElement("button");
+            buyButton.innerHTML = "Buy Now";
+
+            div.append(img, productName, price, Rating, quantityLabel, decrementButton, quantitySpan, incrementButton, removeButton, buyButton);
+
+            document.querySelector("body").append(div);
+
+            removeButton.addEventListener("click", function () {
+                Remove(el, i);
+            });
+
+            buyButton.addEventListener("click", function () {
+                BPage(el, i);
+            });
+        });
+
+        updatePrice(0, false);
+
+        function Remove(el, index) {
+            console.log("Remove button clicked for product: ", el.Product_name);
+            var product = JSON.parse(localStorage.getItem("information")) || [];
+            product.splice(index, 1);
+            localStorage.setItem("information", JSON.stringify(product));
+            location.reload();
+        }
+
+        function BPage(el, index) {
+            window.location.href = "paymentPage.html";
+        }
+
+        function updatePrice(Price, isIncrement) {
+            var totalPriceElement = document.getElementById("totalPrice");
+            var currentTotalPrice = parseFloat(totalPriceElement.innerHTML.replace(/[^\d.]/g, ""));
+            if (isNaN(currentTotalPrice)) {
+                currentTotalPrice = 0; 
+            }
+            if (isIncrement) {
+                currentTotalPrice += parseFloat(Price);
+            } else {
+                currentTotalPrice -= parseFloat(Price);
+            }
+            totalPriceElement.innerHTML = "$" + currentTotalPrice.toFixed(2);
+        }
+    </script>
+
+    <!-- <p>Total Price: <span id="totalPrice">0.00</span></p> -->
+</body>
+</html>
