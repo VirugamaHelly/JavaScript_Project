@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <style>
+        body {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .search input {
+            padding: 10px;
+            width: 250px;
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            font-size: 50px;
+        }
+
+        .info {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="search">
+            <input type="text" id="cityInput" placeholder="Enter The City" oninput="getWeather()">
+        </div>
+
+        <div class="weather-info">
+            <div class="icon" id="Icon">☀️</div>
+            <div class="info">
+                <div id="day">City & Country</div>
+                <div id="temperature">Temperature</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function getWeather() {
+            const city = document.getElementById('cityInput').value;
+
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0d00ff8f368c3ff5004cb712c275ab6f`)
+                .then(res => {
+                    return res.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    display(data);
+                })
+        }
+
+        function display(data) {
+
+            day.innerHTML = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            temperature.innerHTML = `${Math.round(data.main.temp - 273.15)}°C`;
+
+        }
+
+
+    </script>
+</body>
+
+
